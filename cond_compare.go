@@ -93,7 +93,7 @@ func (lt Lt) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return lt.IsValid()
+	return false
 }
 
 // Lte defines <= condition
@@ -127,7 +127,7 @@ func (lte Lte) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return lte.IsValid()
+	return false
 }
 
 // Gt defines > condition
@@ -161,7 +161,7 @@ func (gt Gt) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return gt.IsValid()
+	return false
 }
 
 // Gte defines >= condition

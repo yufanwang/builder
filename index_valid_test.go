@@ -17,14 +17,19 @@ type Data struct {
 
 func TestIndexValidSingle(t *testing.T) {
 	cond1 := If(1 > 0, Eq{"a": 1}, Eq{"b": 1})
-	idx, err := IdxValid(&Data{}, cond1)
+	idx1, err := IdxValid(&Data{}, cond1)
 	assert.NoError(t, err)
-	assert.EqualValues(t, false, idx)
+	assert.EqualValues(t, false, idx1)
 
 	cond2 := Eq{"id": 1}
-	idx1, err := IdxValid(&Data{}, cond2)
+	idx2, err := IdxValid(&Data{}, cond2)
 	assert.NoError(t, err)
-	assert.EqualValues(t, true, idx1)
+	assert.EqualValues(t, true, idx2)
+
+	cond3 := Gt{"age": 1}
+	idx3, err := IdxValid(&Data{}, cond3)
+	assert.NoError(t, err)
+	assert.EqualValues(t, false, idx3)
 
 }
 
