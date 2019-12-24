@@ -6,6 +6,7 @@ package builder
 
 import (
 	"fmt"
+	"reflect"
 	"sort"
 )
 
@@ -79,6 +80,10 @@ func (neq Neq) Or(conds ...Cond) Cond {
 // IsValid tests if this condition is valid
 func (neq Neq) IsValid() bool {
 	return len(neq) > 0
+}
+
+func (neq Neq) IdxValid(cols map[string]reflect.Type) bool {
+	return false
 }
 
 // sortedKeys returns all keys of this Neq sorted with sort.Strings.

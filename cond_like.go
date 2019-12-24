@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // Like defines like condition
 type Like [2]string
@@ -38,4 +41,10 @@ func (like Like) Or(conds ...Cond) Cond {
 // IsValid tests if this condition is valid
 func (like Like) IsValid() bool {
 	return len(like[0]) > 0 && len(like[1]) > 0
+}
+
+func (like Like) IdxValid(cols map[string]reflect.Type) bool {
+
+	return like.IsValid() && like[1][0] != '%' && colIdxCheck(cols, like[0], reflect.TypeOf(like[1]), like[0])
+
 }

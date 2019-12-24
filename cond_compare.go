@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // WriteMap writes conditions' SQL to Writer, op could be =, <>, >, <, <=, >= and etc.
 func WriteMap(w Writer, data map[string]interface{}, op string) error {
@@ -84,6 +87,15 @@ func (lt Lt) IsValid() bool {
 	return len(lt) > 0
 }
 
+func (lt Lt) IdxValid(cols map[string]reflect.Type) bool {
+	for k, v := range lt {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+			return true
+		}
+	}
+	return lt.IsValid()
+}
+
 // Lte defines <= condition
 type Lte map[string]interface{}
 
@@ -107,6 +119,15 @@ func (lte Lte) Or(conds ...Cond) Cond {
 // IsValid tests if this Eq is valid
 func (lte Lte) IsValid() bool {
 	return len(lte) > 0
+}
+
+func (lte Lte) IdxValid(cols map[string]reflect.Type) bool {
+	for k, v := range lte {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+			return true
+		}
+	}
+	return lte.IsValid()
 }
 
 // Gt defines > condition
@@ -134,6 +155,15 @@ func (gt Gt) IsValid() bool {
 	return len(gt) > 0
 }
 
+func (gt Gt) IdxValid(cols map[string]reflect.Type) bool {
+	for k, v := range gt {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+			return true
+		}
+	}
+	return gt.IsValid()
+}
+
 // Gte defines >= condition
 type Gte map[string]interface{}
 
@@ -157,4 +187,13 @@ func (gte Gte) Or(conds ...Cond) Cond {
 // IsValid tests if this Eq is valid
 func (gte Gte) IsValid() bool {
 	return len(gte) > 0
+}
+
+func (gte Gte) IdxValid(cols map[string]reflect.Type) bool {
+	for k, v := range gte {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+			return true
+		}
+	}
+	return gte.IsValid()
 }

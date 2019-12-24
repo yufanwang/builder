@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // Between implmentes between condition
 type Between struct {
@@ -62,4 +65,9 @@ func (between Between) Or(conds ...Cond) Cond {
 // IsValid tests if the condition is valid
 func (between Between) IsValid() bool {
 	return len(between.Col) > 0
+}
+
+func (between Between) IdxValid(cols map[string]reflect.Type) bool {
+	return colIdxCheck(cols, between.Col, reflect.TypeOf(between.LessVal), between.LessVal) &&
+		colIdxCheck(cols, between.Col, reflect.TypeOf(between.MoreVal), between.MoreVal)
 }

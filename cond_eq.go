@@ -6,6 +6,7 @@ package builder
 
 import (
 	"fmt"
+	"reflect"
 	"sort"
 )
 
@@ -97,6 +98,15 @@ func (eq Eq) Or(conds ...Cond) Cond {
 // IsValid tests if this Eq is valid
 func (eq Eq) IsValid() bool {
 	return len(eq) > 0
+}
+
+func (eq Eq) IdxValid(cols map[string]reflect.Type) bool {
+	for k, v := range eq {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+			return true
+		}
+	}
+	return eq.IsValid()
 }
 
 // sortedKeys returns all keys of this Eq sorted with sort.Strings.

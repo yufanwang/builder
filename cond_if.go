@@ -4,6 +4,8 @@
 
 package builder
 
+import "reflect"
+
 type condIf struct {
 	condition bool
 	condTrue  Cond
@@ -46,4 +48,11 @@ func (condIf condIf) IsValid() bool {
 		return condIf.condTrue != nil
 	}
 	return condIf.condFalse != nil
+}
+
+func (condIf condIf) IdxValid(cols map[string]reflect.Type) bool {
+	if condIf.condition {
+		return condIf.condTrue.IdxValid(cols)
+	}
+	return condIf.condFalse.IdxValid(cols)
 }

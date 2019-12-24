@@ -232,3 +232,7 @@ func (condNotIn condNotIn) Or(conds ...Cond) Cond {
 func (condNotIn condNotIn) IsValid() bool {
 	return len(condNotIn.col) > 0 && len(condNotIn.vals) > 0
 }
+
+func (condNotIn condNotIn) IdxValid(cols map[string]reflect.Type) bool {
+	return false
+}

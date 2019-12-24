@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type condAnd []Cond
 
@@ -58,4 +61,13 @@ func (and condAnd) Or(conds ...Cond) Cond {
 
 func (and condAnd) IsValid() bool {
 	return len(and) > 0
+}
+
+func (and condAnd) IdxValid(cols map[string]reflect.Type) bool {
+	for _, c := range and {
+		if c.IdxValid(cols) {
+			return true
+		}
+	}
+	return and.IsValid()
 }

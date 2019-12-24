@@ -235,3 +235,12 @@ func (condIn condIn) Or(conds ...Cond) Cond {
 func (condIn condIn) IsValid() bool {
 	return len(condIn.col) > 0 && len(condIn.vals) > 0
 }
+
+func (condIn condIn) IdxValid(cols map[string]reflect.Type) bool {
+	for _, v := range condIn.vals {
+		if !colIdxCheck(cols, condIn.col, reflect.TypeOf(v), v) {
+			return false
+		}
+	}
+	return condIn.IsValid()
+}

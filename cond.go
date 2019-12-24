@@ -6,6 +6,7 @@ package builder
 
 import (
 	"io"
+	"reflect"
 )
 
 // Writer defines the interface
@@ -42,6 +43,7 @@ func (s *BytesWriter) Append(args ...interface{}) {
 
 // Cond defines an interface
 type Cond interface {
+	IndexValid
 	WriteTo(Writer) error
 	And(...Cond) Cond
 	Or(...Cond) Cond
@@ -70,5 +72,9 @@ func (condEmpty) Or(conds ...Cond) Cond {
 }
 
 func (condEmpty) IsValid() bool {
+	return false
+}
+
+func (condEmpty) IdxValid(cols map[string]reflect.Type) bool {
 	return false
 }

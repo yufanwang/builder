@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // Not defines NOT condition
 type Not [1]Cond
@@ -74,4 +77,8 @@ func (not Not) Or(conds ...Cond) Cond {
 // IsValid tests if this condition is valid
 func (not Not) IsValid() bool {
 	return not[0] != nil && not[0].IsValid()
+}
+
+func (not Not) IdxValid(cols map[string]reflect.Type) bool {
+	return false
 }

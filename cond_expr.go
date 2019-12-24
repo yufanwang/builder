@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 type expr struct {
 	sql  string
@@ -36,4 +39,8 @@ func (expr expr) Or(conds ...Cond) Cond {
 
 func (expr expr) IsValid() bool {
 	return len(expr.sql) > 0
+}
+
+func (expr expr) IdxValid(cols map[string]reflect.Type) bool {
+	return false
 }

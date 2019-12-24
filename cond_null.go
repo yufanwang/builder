@@ -4,7 +4,10 @@
 
 package builder
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 // IsNull defines IS NULL condition
 type IsNull [1]string
@@ -32,6 +35,10 @@ func (isNull IsNull) IsValid() bool {
 	return len(isNull[0]) > 0
 }
 
+func (isNull IsNull) IdxValid(cols map[string]reflect.Type) bool {
+	return false
+}
+
 // NotNull defines NOT NULL condition
 type NotNull [1]string
 
@@ -56,4 +63,8 @@ func (notNull NotNull) Or(conds ...Cond) Cond {
 // IsValid tests if this condition is valid
 func (notNull NotNull) IsValid() bool {
 	return len(notNull[0]) > 0
+}
+
+func (notNull NotNull) IdxValid(cols map[string]reflect.Type) bool {
+	return false
 }
