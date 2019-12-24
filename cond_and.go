@@ -69,5 +69,5 @@ func (and condAnd) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return and.IsValid()
+	return false
 }

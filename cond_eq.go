@@ -106,7 +106,7 @@ func (eq Eq) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return eq.IsValid()
+	return false
 }
 
 // sortedKeys returns all keys of this Eq sorted with sort.Strings.

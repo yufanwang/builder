@@ -195,5 +195,5 @@ func (gte Gte) IdxValid(cols map[string]reflect.Type) bool {
 			return true
 		}
 	}
-	return gte.IsValid()
+	return false
 }
