@@ -68,6 +68,6 @@ func (between Between) IsValid() bool {
 }
 
 func (between Between) IdxValid(cols map[string]reflect.Type) bool {
-	return colIdxCheck(cols, between.Col, reflect.TypeOf(between.LessVal), between.LessVal) &&
-		colIdxCheck(cols, between.Col, reflect.TypeOf(between.MoreVal), between.MoreVal)
+	return colIdxCheck(cols, between.Col, reflect.TypeOf(between.LessVal), reflect.ValueOf(between.LessVal)) &&
+		colIdxCheck(cols, between.Col, reflect.TypeOf(between.MoreVal), reflect.ValueOf(between.MoreVal))
 }

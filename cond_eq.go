@@ -102,7 +102,7 @@ func (eq Eq) IsValid() bool {
 
 func (eq Eq) IdxValid(cols map[string]reflect.Type) bool {
 	for k, v := range eq {
-		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), reflect.ValueOf(v)) {
 			return true
 		}
 	}

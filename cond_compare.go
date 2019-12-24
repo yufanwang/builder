@@ -89,7 +89,7 @@ func (lt Lt) IsValid() bool {
 
 func (lt Lt) IdxValid(cols map[string]reflect.Type) bool {
 	for k, v := range lt {
-		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), reflect.ValueOf(v)) {
 			return true
 		}
 	}
@@ -123,7 +123,7 @@ func (lte Lte) IsValid() bool {
 
 func (lte Lte) IdxValid(cols map[string]reflect.Type) bool {
 	for k, v := range lte {
-		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), reflect.ValueOf(v)) {
 			return true
 		}
 	}
@@ -157,7 +157,7 @@ func (gt Gt) IsValid() bool {
 
 func (gt Gt) IdxValid(cols map[string]reflect.Type) bool {
 	for k, v := range gt {
-		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), reflect.ValueOf(v)) {
 			return true
 		}
 	}
@@ -191,7 +191,7 @@ func (gte Gte) IsValid() bool {
 
 func (gte Gte) IdxValid(cols map[string]reflect.Type) bool {
 	for k, v := range gte {
-		if colIdxCheck(cols, k, reflect.TypeOf(v), v) {
+		if colIdxCheck(cols, k, reflect.TypeOf(v), reflect.ValueOf(v)) {
 			return true
 		}
 	}
