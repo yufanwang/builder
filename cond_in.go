@@ -238,7 +238,7 @@ func (condIn condIn) IsValid() bool {
 
 func (condIn condIn) IdxValid(cols map[string]reflect.Type) bool {
 	for _, v := range condIn.vals {
-		if !colIdxCheck(cols, condIn.col, reflect.TypeOf(v), reflect.ValueOf(v)) {
+		if !colIdxCheck(cols, condIn.col, reflect.ValueOf(v)) {
 			return false
 		}
 	}

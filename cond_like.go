@@ -45,6 +45,6 @@ func (like Like) IsValid() bool {
 
 func (like Like) IdxValid(cols map[string]reflect.Type) bool {
 
-	return like.IsValid() && like[1][0] != '%' && colIdxCheck(cols, like[0], reflect.TypeOf(like[1]), reflect.ValueOf(like[0]))
+	return like.IsValid() && like[1][0] != '%' && colIdxCheck(cols, like[0], reflect.ValueOf(like[1]))
 
 }

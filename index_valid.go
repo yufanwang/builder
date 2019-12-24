@@ -65,14 +65,14 @@ func parseIdxTag(tag string) (isIdx bool, col string) {
 	return
 }
 
-func colIdxCheck(cols map[string]reflect.Type, colName string, colT reflect.Type, colVal reflect.Value) bool {
-	fmt.Println(colName, colT, colVal)
+func colIdxCheck(cols map[string]reflect.Type, colName string, colVal reflect.Value) bool {
+	fmt.Println(colName, colVal)
 	vType, ok := cols[colName]
 	if !ok {
 		return false
 	}
-	fmt.Println(colT, vType)
-	return convertFree(colT, vType) && !isDefaultVal(colVal)
+	fmt.Println(vType)
+	return convertFree(colVal.Type(), vType) && !isDefaultVal(colVal)
 }
 
 func isDefaultVal(colVal reflect.Value) bool {
