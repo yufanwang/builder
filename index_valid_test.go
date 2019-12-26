@@ -30,7 +30,6 @@ func TestIndexValidSingle(t *testing.T) {
 	idx3, err := IdxValid(&Data{}, cond3)
 	assert.NoError(t, err)
 	assert.EqualValues(t, false, idx3)
-
 }
 
 func TestIndexValidAnd(t *testing.T) {
@@ -47,7 +46,7 @@ func TestIndexValidAnd(t *testing.T) {
 	cond3 := And(Eq{"a": 1}, Like{"nick_name", "qqqq"})
 	idx3, err := IdxValid(&Data{}, cond3)
 	assert.NoError(t, err)
-	assert.EqualValues(t, true, idx3)
+	assert.EqualValues(t, false, idx3)
 
 	cond4 := And(Eq{"a": 1}, Like{"nick_name", "%qqqq"})
 	idx4, err := IdxValid(&Data{}, cond4)
@@ -63,5 +62,4 @@ func TestIndexValidAnd(t *testing.T) {
 	idx6, err := IdxValid(&Data{}, cond6)
 	assert.NoError(t, err)
 	assert.EqualValues(t, false, idx6)
-
 }
